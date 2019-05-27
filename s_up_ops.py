@@ -45,7 +45,7 @@ class SUP_OT_select_level_up(Operator):
     @staticmethod
     def _collection_selected(collection):
         # True if all objects in collection are selected
-        return all([item.select_get() for item in collection.all_objects])
+        return bool(collection.all_objects) and all([item.select_get() for item in collection.all_objects])
 
     @staticmethod
     def _parent_collection(collection):
