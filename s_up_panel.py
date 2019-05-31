@@ -29,6 +29,7 @@ def register():
     register_class(SUP_PT_main_panel)
     bpy.types.OUTLINER_HT_header.prepend(SUP_PT_main_panel.draw_button)
 
+
 def unregister():
     bpy.types.OUTLINER_HT_header.remove(SUP_PT_main_panel.draw_button)
     unregister_class(SUP_PT_main_panel)
