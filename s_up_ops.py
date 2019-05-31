@@ -21,27 +21,25 @@ class SUP_OT_select_level_up(Operator):
         for collection in bpy.data.collections:
             if __class__._collection_partially_selected(collection=collection, check_nested=False):
                 partially_selected_collections.append(collection)
-        print('partially_selected_collections', partially_selected_collections)
         # get full-selected collections
         selected_collections = []
         for collection in bpy.data.collections:
-            if __class__._collection_selected(collection=collection, check_nested=False):
+            if __class__._collection_selected(collection=collection, check_nested=True):
                 selected_collections.append(collection)
-        print('selected_collections', selected_collections)
         # Select-UP
         if partially_selected_collections:
             # if there are partially-selected collections - fill them to all-selected
             for collection in partially_selected_collections:
-                __class__._select_collection(collection=collection)
+                __class__._select_collection(collection=collection, select_nested=True)
         elif selected_collections:
             # if there are full-selected collections - select their parent collection
             collections_to_select = []
             for collection in selected_collections:
                 parent_collection = __class__._parent_collection(collection)
-                if parent_collection and parent_collection not in collections_to_select:
+                if parent_collection and parent_collection not in collections_to_select and parent_collection not in selected_collections:
                     collections_to_select.append(parent_collection)
             for collection in collections_to_select:
-                __class__._select_collection(collection=collection)
+                __class__._select_collection(collection=collection, select_nested=True)
         return {'FINISHED'}
 
     @classmethod
@@ -54,7 +52,7 @@ class SUP_OT_select_level_up(Operator):
     @staticmethod
     def _select_collection(collection, select_nested=False):
         # select collection (select all items in collection)
-        items_to_select = collection.objects if select_nested else collection.all_objects
+        items_to_select = collection.all_objects if select_nested else collection.objects
         for item in items_to_select:
             item.select_set(True)
 
@@ -62,13 +60,13 @@ class SUP_OT_select_level_up(Operator):
     def _collection_selected(collection, check_nested=False):
         # True if collection selected (all items in collection are selected)
         items = collection.all_objects if check_nested else collection.objects
-        return bool(items) and all([item.select_get() for item in items])
+        return bool(collection.all_objects) and bool(items) and all([item.select_get() for item in items])
 
     @staticmethod
     def _collection_partially_selected(collection, check_nested=False):
         # True if collection selected (all items in collection are selected)
         items = collection.all_objects if check_nested else collection.objects
-        return bool(items) and any([item.select_get() for item in items]) and any([not item.select_get() for item in items])
+        return bool(collection.all_objects) and any([item.select_get() for item in items]) and any([not item.select_get() for item in items])
 
     @staticmethod
     def _parent_collection(collection):
