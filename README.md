@@ -22,7 +22,7 @@ User Preferences - Add-ons - Install Add-on from File - select distributive arch
 **Usage**
 
 - Select single object from some nested collections
-- Each pressing the "Select 1 level up" button make the level-up selection for items in collections.
+- Each pressing the "Select Level Up" button make the level-up selection for items in collections.
 
 **Shortcuts**
 
