@@ -6,6 +6,7 @@
 
 from . import s_up_panel
 from . import s_up_ops
+from . import s_up_keymap
 
 
 bl_info = {
@@ -14,7 +15,7 @@ bl_info = {
     'author': 'Nikita Akimov',
     'version': (1, 1, 0),
     'blender': (2, 80, 0),
-    'location': 'Outliner window',
+    'location': 'N-Panel, Outliner window',
     'wiki_url': 'https://b3d.interplanety.org/en/blender-add-on-s-up',
     'tracker_url': 'https://b3d.interplanety.org/en/blender-add-on-s-up',
     'description': 'Select objects up by collections levels'
@@ -24,9 +25,11 @@ bl_info = {
 def register():
     s_up_ops.register()
     s_up_panel.register()
+    s_up_keymap.register()
 
 
 def unregister():
+    s_up_keymap.unregister()
     s_up_panel.unregister()
     s_up_ops.unregister()
 
