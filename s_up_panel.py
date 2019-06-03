@@ -18,7 +18,7 @@ class SUP_PT_main_panel(Panel):
 
     def draw(self, context):
         layout = self.layout
-        layout.operator('s_up.select_level_up', text='Select 1 level up', icon='FILE_PARENT')
+        layout.operator('s_up.select_level_up', text='Select Level Up', icon='FILE_PARENT')
 
     def draw_button(self, context):
         layout = self.layout

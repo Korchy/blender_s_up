@@ -24,6 +24,10 @@ User Preferences - Add-ons - Install Add-on from File - select distributive arch
 - Select single object from some nested collections
 - Each pressing the "Select 1 level up" button make the level-up selection for items in collections.
 
+**Shortcuts**
+
+- shift+g - Select Level Up
+
 **Tested with Blender versions:**
 
 2.80
@@ -32,6 +36,7 @@ User Preferences - Add-ons - Install Add-on from File - select distributive arch
 
 1.1.0.
 - Algorithm change. If there are partially-selected collections - next press fill them to full selected. If there are only full-selected collections - next press select the level-up (parent) collection.
+- Added shortcuts to the "Select" menu and to the context "Select Grouped" menu
 
 1.0.0.
 - This release
