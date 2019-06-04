@@ -19,7 +19,7 @@ class SUP_OT_select_level_up(Operator):
         # get partially-selected collections
         partially_selected_collections = []
         for collection in bpy.data.collections:
-            if __class__._collection_partially_selected(collection=collection, check_nested=False):
+            if __class__._collection_partially_selected(collection=collection):
                 partially_selected_collections.append(collection)
         # get full-selected collections
         selected_collections = []
@@ -63,10 +63,20 @@ class SUP_OT_select_level_up(Operator):
         return bool(collection.all_objects) and bool(items) and all([item.select_get() for item in items])
 
     @staticmethod
-    def _collection_partially_selected(collection, check_nested=False):
-        # True if collection selected (all items in collection are selected)
-        items = collection.all_objects if check_nested else collection.objects
-        return bool(collection.all_objects) and any([item.select_get() for item in items]) and any([not item.select_get() for item in items])
+    def _collection_partially_selected(collection):
+        # True if collection partially selected
+        # have any items
+        # and (
+        # any selected item and any not selected
+        # or
+        # amy items on collection level and all of them selected and any not selected item in nested collections
+        # )
+        return bool(collection.all_objects)\
+               and (
+                   any([item.select_get() for item in collection.objects]) and any([not item.select_get() for item in collection.objects])
+                   or
+                   bool(collection.objects) and all([item.select_get() for item in collection.objects]) and any([not item.select_get() for item in collection.all_objects])
+               )
 
     @staticmethod
     def _parent_collection(collection):
