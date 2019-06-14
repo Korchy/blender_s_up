@@ -21,6 +21,7 @@ class Addon:
         if os.path.exists(conf_file_path):
             with open(conf_file_path) as conf_file:
                 json_data = json.load(conf_file)
+                print('json', json_data)
                 if 'dev_status' in json_data and json_data['dev_status']:
                     rez = True
                 conf_file.close()
