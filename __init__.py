@@ -13,7 +13,7 @@ bl_info = {
     'name': 'Select-UP',
     'category': 'Object',
     'author': 'Nikita Akimov',
-    'version': (1, 1, 0),
+    'version': (1, 2, 0),
     'blender': (2, 80, 0),
     'location': 'N-Panel, Outliner window',
     'wiki_url': 'https://b3d.interplanety.org/en/blender-add-on-select-up/',

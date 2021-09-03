@@ -19,10 +19,12 @@ class SUP_MT_ex_menu(Menu):
         layout = self.layout
         layout.operator_enum('object.select_grouped', 'type')
         layout.operator('s_up.select_level_up')
+        layout.operator('s_up.select_level_up_parent')
 
     def extend_menu(self, context):
         # for 'select' menu
         self.layout.operator('s_up.select_level_up', text='Select Level Up')
+        self.layout.operator('s_up.select_level_up_parent', text='Select Level Up by Parenting')
 
 
 class SUP_KeyMap:

@@ -7,32 +7,35 @@ Author: Nikita Akimov interplanety@interplanety.org
 
 <img src="https://b3d.interplanety.org/wp-content/upload_content/2019/05/01-3.jpg" title="S - UP">
 
-**Current version**
+Current version
+-
+1.2.0.
 
-1.1.0.
-
-**Installation**
-
+Installation
+-
 User Preferences - Add-ons - Install Add-on from File - select distributive archive
 
-**Location**
-
+Location
+-
 "3D View" window - N-Panel - "S-UP" tab or the "Outliner" window - button with "arrow up".
 
-**Usage**
-
+Usage
+-
 - Select single object from some nested collections
 - Each pressing the "Select Level Up" button make the level-up selection for items in collections.
 
-**Shortcuts**
-
+Shortcuts
+-
 - shift+g - Select Level Up
 
-**Tested with Blender versions:**
-
+For Blender versions:
+-
 2.80, 2.81, 2.82, 2.83, 2.90
 
-**Version history:**
+Version history:
+-
+1.2.0.
+- Added an option to "select up" by parenting
 
 1.1.0.
 - Algorithm change. If there are partially-selected collections - next press fill them to full selected. If there are only full-selected collections - next press select the level-up (parent) collection.

@@ -19,10 +19,13 @@ class SUP_PT_main_panel(Panel):
     def draw(self, context):
         layout = self.layout
         layout.operator('s_up.select_level_up', text='Select Level Up', icon='FILE_PARENT')
+        layout.operator('s_up.select_level_up_parent', text='Select Level Up by Parenting', icon='EMPTY_SINGLE_ARROW')
 
     def draw_button(self, context):
         layout = self.layout
-        layout.operator('s_up.select_level_up', text='', icon='FILE_PARENT')
+        row = layout.row(align=True)
+        row.operator('s_up.select_level_up', text='', icon='FILE_PARENT')
+        row.operator('s_up.select_level_up_parent', text='', icon='EMPTY_SINGLE_ARROW')
 
 
 def register():

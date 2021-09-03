@@ -19,27 +19,28 @@ class SUP_OT_select_level_up(Operator):
         # get partially-selected collections
         partially_selected_collections = []
         for collection in bpy.data.collections:
-            if __class__._collection_partially_selected(collection=collection):
+            if self._collection_partially_selected(collection=collection):
                 partially_selected_collections.append(collection)
         # get full-selected collections
         selected_collections = []
         for collection in bpy.data.collections:
-            if __class__._collection_selected(collection=collection, check_nested=True):
+            if self._collection_selected(collection=collection, check_nested=True):
                 selected_collections.append(collection)
         # Select-UP
         if partially_selected_collections:
             # if there are partially-selected collections - fill them to all-selected
             for collection in partially_selected_collections:
-                __class__._select_collection(collection=collection, select_nested=True)
+                self._select_collection(collection=collection, select_nested=True)
         elif selected_collections:
             # if there are full-selected collections - select their parent collection
             collections_to_select = []
             for collection in selected_collections:
-                parent_collection = __class__._parent_collection(collection)
-                if parent_collection and parent_collection not in collections_to_select and parent_collection not in selected_collections:
+                parent_collection = self._parent_collection(collection)
+                if parent_collection and parent_collection not in collections_to_select \
+                        and parent_collection not in selected_collections:
                     collections_to_select.append(parent_collection)
             for collection in collections_to_select:
-                __class__._select_collection(collection=collection, select_nested=True)
+                self._select_collection(collection=collection, select_nested=True)
         return {'FINISHED'}
 
     @classmethod
@@ -88,9 +89,51 @@ class SUP_OT_select_level_up(Operator):
         return parent
 
 
+class SUP_OT_select_level_up_parent(Operator):
+    bl_idname = 's_up.select_level_up_parent'
+    bl_label = 'Select Level Up by Parenting'
+    bl_description = 'Select objects up 1 level by parenting'
+    bl_options = {'REGISTER', 'UNDO'}
+
+    def execute(self, context):
+        # get partially-selected collections
+        parents = [obj.parent for obj in context.selected_objects if obj.parent]
+        for parent in parents:
+            parent.select_set(True)
+            self.select_all_children(
+                objects=parents,
+                nested=True
+            )
+        return {'FINISHED'}
+
+    @classmethod
+    def poll(cls, context):
+        if context.selected_objects:
+            return True
+        else:
+            return False
+
+    @classmethod
+    def select_all_children(cls, objects, nested=False):
+        # select all children of all objects from list
+        if not isinstance(objects, (list, tuple)):
+            objects = [objects]
+        for obj in objects:
+            if obj and hasattr(obj, 'children') and obj.children:
+                for child in obj.children:
+                    child.select_set(True)
+                    if hasattr(child, 'children') and child.children:
+                        cls.select_all_children(
+                            objects=child,
+                            nested=nested
+                        )
+
+
 def register():
     register_class(SUP_OT_select_level_up)
+    register_class(SUP_OT_select_level_up_parent)
 
 
 def unregister():
+    unregister_class(SUP_OT_select_level_up_parent)
     unregister_class(SUP_OT_select_level_up)
