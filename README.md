@@ -5,7 +5,7 @@ Author: Nikita Akimov interplanety@interplanety.org
 
 <a href="https://b3d.interplanety.org/en/blender-add-on-s-up">Add-on web page</a>
 
-<img src="https://b3d.interplanety.org/wp-content/upload_content/2019/05/01-3.jpg" title="S - UP">
+<img src="https://b3d.interplanety.org/wp-content/upload_content/2021/09/preview_00_1200x600-560x280.jpg" title="S - UP">
 
 Current version
 -
