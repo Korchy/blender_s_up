@@ -9,7 +9,7 @@ Author: Nikita Akimov interplanety@interplanety.org
 
 Current version
 -
-1.2.0.
+1.2.1.
 
 Installation
 -
@@ -30,10 +30,16 @@ Shortcuts
 
 For Blender versions:
 -
-2.80, 2.81, 2.82, 2.83, 2.90, 2.91, 2.92, 2.93, 3.0
+2.80, 2.81, 2.82, 2.83, 2.90, 2.91, 2.92, 2.93, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6
 
 Version history:
 -
+1.3.0.
+- Added option not to show panel in the 3D Viewport (functionality works only with hotkeys)
+- Added default hotkeys:
+  - shift+u - select level up
+  - ctrl+shift+u - select level up by parenting
+
 1.2.0.
 - Added an option to "select up" by parenting
 

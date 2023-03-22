@@ -5,7 +5,7 @@
 #   https://github.com/Korchy/blender_s_up
 
 import bpy
-from bpy.types import Panel
+from bpy.types import Panel, OUTLINER_HT_header
 from bpy.utils import register_class, unregister_class
 
 
@@ -28,11 +28,27 @@ class SUP_PT_main_panel(Panel):
         row.operator('s_up.select_level_up_parent', text='', icon='EMPTY_SINGLE_ARROW')
 
 
-def register():
+def register_panel():
     register_class(SUP_PT_main_panel)
-    bpy.types.OUTLINER_HT_header.prepend(SUP_PT_main_panel.draw_button)
 
+def register_buttons():
+    OUTLINER_HT_header.prepend(SUP_PT_main_panel.draw_button)
+
+def register():
+    if bpy.context.preferences.addons[__package__].preferences.panel_viewport:
+        register_panel()
+    if bpy.context.preferences.addons[__package__].preferences.outliner_buttons:
+        register_buttons()
+
+def unregister_panel():
+    if hasattr(bpy.types, 'SUP_PT_main_panel'):
+        unregister_class(SUP_PT_main_panel)
+
+def unregister_buttons():
+    if hasattr(OUTLINER_HT_header.draw, '_draw_funcs') and \
+            SUP_PT_main_panel.draw_button in OUTLINER_HT_header.draw._draw_funcs:
+        OUTLINER_HT_header.remove(SUP_PT_main_panel.draw_button)
 
 def unregister():
-    bpy.types.OUTLINER_HT_header.remove(SUP_PT_main_panel.draw_button)
-    unregister_class(SUP_PT_main_panel)
+    unregister_buttons()
+    unregister_panel()

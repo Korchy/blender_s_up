@@ -39,6 +39,12 @@ class SUP_KeyMap:
         # add new (old + new)
         if context.window_manager.keyconfigs.addon:
             keymap = context.window_manager.keyconfigs.addon.keymaps.new(name='3D View', space_type='VIEW_3D')
+            # hotkeys
+            keymap_item = keymap.keymap_items.new('s_up.select_level_up', 'U', 'PRESS', shift=True)
+            cls._keymaps.append((keymap, keymap_item))
+            keymap_item = keymap.keymap_items.new('s_up.select_level_up_parent', 'U', 'PRESS', shift=True, ctrl=True)
+            cls._keymaps.append((keymap, keymap_item))
+            # menu
             keymap_item = keymap.keymap_items.new('wm.call_menu', 'G', 'PRESS', shift=True)
             keymap_item.properties.name = SUP_MT_ex_menu.bl_idname
             cls._keymaps.append((keymap, keymap_item))
