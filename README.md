@@ -28,6 +28,11 @@ Shortcuts
 -
 - shift+g - Select Level Up
 
+Default hotkeys
+-
+- shift+u - Select Level Up
+- ctrl+shift+u - Select Level Up by parenting
+
 For Blender versions:
 -
 2.80, 2.81, 2.82, 2.83, 2.90, 2.91, 2.92, 2.93, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6
